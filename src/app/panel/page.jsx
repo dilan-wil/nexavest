@@ -23,7 +23,7 @@ const plans = [
     name: "Starter Plan",
     type: "Basic",
     price: 2500,
-    dailyRevenue: 0.17,
+    dailyRevenue: 300,
     period: 30,
     totalRevenue: 105,
     icon: "savings",
@@ -34,7 +34,7 @@ const plans = [
     name: "Basic Growth",
     type: "Basic",
     price: 5000,
-    dailyRevenue: 0.42,
+    dailyRevenue: 600,
     period: 30,
     totalRevenue: 262.5,
     icon: "trending_up",
@@ -45,7 +45,7 @@ const plans = [
     name: "Basic Plus",
     type: "Basic",
     price: 10000,
-    dailyRevenue: 0.83,
+    dailyRevenue: 1200,
     period: 30,
     totalRevenue: 525,
     icon: "add_chart",
@@ -56,7 +56,7 @@ const plans = [
     name: "Pro Starter",
     type: "Pro",
     price: 20000,
-    dailyRevenue: 2.67,
+    dailyRevenue: 2400,
     period: 30,
     totalRevenue: 1080,
     icon: "trending_up",
@@ -67,7 +67,7 @@ const plans = [
     name: "Pro Growth",
     type: "Pro",
     price: 50000,
-    dailyRevenue: 6.67,
+    dailyRevenue: 6000,
     period: 30,
     totalRevenue: 2700,
     icon: "show_chart",
@@ -78,7 +78,7 @@ const plans = [
     name: "Pro Plus",
     type: "Pro",
     price: 100000,
-    dailyRevenue: 13.33,
+    dailyRevenue: 12000,
     period: 30,
     totalRevenue: 5400,
     icon: "analytics",
@@ -89,9 +89,9 @@ const plans = [
     name: "Elite Plan",
     type: "Premium",
     price: 250000,
-    dailyRevenue: 40,
+    dailyRevenue: 24000,
     period: 30,
-    totalRevenue: 12000,
+    totalRevenue: 24000,
     icon: "diamond",
     color: "purple",
   },
@@ -100,9 +100,9 @@ const plans = [
     name: "VIP Plan",
     type: "Premium",
     price: 500000,
-    dailyRevenue: 100,
+    dailyRevenue: 60000,
     period: 30,
-    totalRevenue: 30000,
+    totalRevenue: 600,
     icon: "workspace_premium",
     color: "purple",
   },
@@ -111,7 +111,7 @@ const plans = [
     name: "VVIP Plan",
     type: "Premium",
     price: 1000000,
-    dailyRevenue: 100,
+    dailyRevenue: 120000,
     period: 30,
     totalRevenue: 30000,
     icon: "workspace_premium",
@@ -298,23 +298,24 @@ export default function Home() {
                   </span>
                 </div>
                 <h3 className="text-xl font-bold mb-2 text-gray-800">{plan.name}</h3>
-                <p className="text-gray-600 mb-4">Investment: ${plan.price}</p>
+                <p className="text-gray-600 mb-4">Investment: XAF{plan.price}</p>
                 <div className="text-3xl font-bold mb-6 text-gray-800">
                   ${plan.dailyRevenue.toFixed(2)}
                   <span className="text-sm text-gray-500 font-normal">/day</span>
                 </div>
-                <p className="text-gray-600 mb-2">Period: {plan.period} days</p>
-                <p className="text-gray-600 mb-4">Total Revenue: ${plan.totalRevenue}</p>
+                <p className="text-gray-600 mb-2">Période: {plan.period} days</p>
+                <p className="text-gray-600 mb-4">Revenus Totale: XAF{plan.dailyRevenue * plan.period}</p>
                 <Button
+                  onclick={() => router.push("/panel/investir")}
                   className={`w-full bg-${plan.color}-600 hover:bg-${plan.color}-700 text-white py-3 rounded-xl font-medium transform hover:scale-105 transition-all duration-300`}
                 >
-                  Invest Now
+                  Investir
                 </Button>
               </Card>
             ))}
           </div>
           <div className="mt-8 text-center">
-            <Link href="/invest" passHref>
+            <Link href="/panel/invest" passHref>
               <Button variant="outline" size="lg">
                 View All Plans
               </Button>

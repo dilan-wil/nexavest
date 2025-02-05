@@ -46,23 +46,23 @@ export default function Profile() {
             <span className="absolute bottom-0 right-0 bg-green-500 w-5 h-5 rounded-full border-2 border-white"></span>
           </div>
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold mb-1">John Doe</h1>
-            <p className="text-gray-600 text-sm md:text-base">john.doe@example.com</p>
-            <p className="text-gray-500 text-xs md:text-sm">Member since: Jan 2023</p>
+            <h1 className="text-2xl md:text-3xl font-bold mb-1">{userInfo?.name}</h1>
+            <p className="text-gray-600 text-sm md:text-base">{userInfo?.email}</p>
+            <p className="text-gray-500 text-xs md:text-sm">Membre depuis: Fev 2025</p>
           </div>
         </div>
         <div className="flex flex-wrap gap-2 md:gap-4 w-full md:w-auto">
           <Button variant="outline" className="flex-1 md:flex-none">
             <span className="material-symbols-outlined mr-2">edit</span>
-            Edit Profile
+            Modifier
           </Button>
           <Button variant="outline" className="flex-1 md:flex-none">
             <span className="material-symbols-outlined mr-2">security</span>
-            Security
+            A propos
           </Button>
           <Button variant="destructive" className="flex-1 md:flex-none">
             <span className="material-symbols-outlined mr-2">logout</span>
-            Log Out
+            Déconnexion
           </Button>
         </div>
       </header>
@@ -70,47 +70,46 @@ export default function Profile() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         <Card className="bg-white p-4 md:p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
           <span className="material-symbols-outlined text-4xl md:text-5xl text-blue-500 mb-4">account_balance</span>
-          <h2 className="text-lg md:text-xl font-semibold mb-2">Current Balance</h2>
-          <p className="text-2xl md:text-3xl font-bold">$12,345.67</p>
-          <p className="text-sm text-gray-500 mt-2">Last updated: 2 hours ago</p>
+          <h2 className="text-lg md:text-xl font-semibold mb-2">Solde Actuelle</h2>
+          <p className="text-2xl md:text-3xl font-bold">XAF{userInfo?.balance ?? 0}</p>
         </Card>
+
+      <DepositWithdrawButtons />
+
 
         <Card className="bg-white p-4 md:p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
           <span className="material-symbols-outlined text-4xl md:text-5xl text-green-500 mb-4">arrow_downward</span>
-          <h2 className="text-lg md:text-xl font-semibold mb-2">Total Deposits</h2>
-          <p className="text-2xl md:text-3xl font-bold">$45,678.90</p>
-          <p className="text-sm text-gray-500 mt-2">Across 23 transactions</p>
+          <h2 className="text-lg md:text-xl font-semibold mb-2">Totale Déposé</h2>
+          <p className="text-2xl md:text-3xl font-bold">XAF{userInfo?.deposits ?? 0}</p>
         </Card>
 
         <Card className="bg-white p-4 md:p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
           <span className="material-symbols-outlined text-4xl md:text-5xl text-red-500 mb-4">arrow_upward</span>
-          <h2 className="text-lg md:text-xl font-semibold mb-2">Total Withdrawals</h2>
-          <p className="text-2xl md:text-3xl font-bold">$23,456.78</p>
-          <p className="text-sm text-gray-500 mt-2">Across 12 transactions</p>
+          <h2 className="text-lg md:text-xl font-semibold mb-2">Totale Retiré</h2>
+          <p className="text-2xl md:text-3xl font-bold">XAF{userInfo?.withdrawals ?? 0}</p>
         </Card>
 
         <Card className="bg-white p-4 md:p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
           <span className="material-symbols-outlined text-4xl md:text-5xl text-purple-500 mb-4">group</span>
-          <h2 className="text-lg md:text-xl font-semibold mb-2">Referrals</h2>
+          <h2 className="text-lg md:text-xl font-semibold mb-2">Nombre de Filleul</h2>
           <p className="text-2xl md:text-3xl font-bold">24</p>
-          <p className="text-sm text-gray-500 mt-2">Earned: $1,200.00</p>
+          <p className="text-sm text-gray-500 mt-2">Gagné: XAF{userInfo?.referralEarnings ?? 0}</p>
         </Card>
 
         <Card className="bg-white p-4 md:p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-          <span className="material-symbols-outlined text-4xl md:text-5xl text-amber-500 mb-4">dashboard</span>
-          <h2 className="text-lg md:text-xl font-semibold mb-2">Active Plans</h2>
-          <p className="text-2xl md:text-3xl font-bold">3</p>
-          <p className="text-sm text-gray-500 mt-2">Total invested: $5,000.00</p>
+          <span className="material-symbols-outlined text-4xl md:text-5xl text-amber-500 mb-4">Pannel</span>
+          <h2 className="text-lg md:text-xl font-semibold mb-2">Plans Active</h2>
+          <p className="text-2xl md:text-3xl font-bold">{userInfo?.plans?.length ?? 0}</p>
+          {/* <p className="text-sm text-gray-500 mt-2">Total invested: $5,000.00</p> */}
         </Card>
 
         <Card className="bg-gradient-to-br from-blue-500 to-blue-600 p-4 md:p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow text-white">
           <span className="material-symbols-outlined text-4xl md:text-5xl mb-4">trending_up</span>
           <h2 className="text-lg md:text-xl font-semibold mb-2">Performance</h2>
-          <p className="text-2xl md:text-3xl font-bold">+15.7%</p>
-          <p className="text-sm mt-2">Last 30 days</p>
+          <p className="text-2xl md:text-3xl font-bold">XAF{userInfo?.earnings ?? 0} gagnés</p>
+          {/* <p className="text-sm mt-2">Last 30 days</p> */}
         </Card>
       </div>
-      <DepositWithdrawButtons />
     </div>
   )
 }

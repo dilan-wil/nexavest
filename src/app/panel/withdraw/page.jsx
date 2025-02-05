@@ -95,7 +95,7 @@ export default function Withdrawal() {
     <div className="w-full max-w-[1200px] bg-gray-100 p-4 md:p-6 rounded-xl mx-auto">
       <Card className="bg-white rounded-xl p-4 md:p-6 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
-          <h1 className="text-2xl font-bold">Withdrawal</h1>
+          <h1 className="text-2xl font-bold">Retrait</h1>
           <div className="relative">
             <details className="group">
               <summary className="flex items-center gap-2 cursor-pointer list-none px-4 py-2 rounded-lg hover:bg-gray-50">
@@ -103,7 +103,7 @@ export default function Withdrawal() {
                 Information
               </summary>
               <div className="absolute right-0 mt-2 w-64 p-4 bg-white rounded-xl shadow-lg border border-gray-100 z-10">
-                <p className="text-sm">Select your preferred withdrawal method and enter your account details.</p>
+                <p className="text-sm">Choisissez votre mode de retrait et entrez vos informations.</p>
               </div>
             </details>
           </div>
@@ -112,20 +112,14 @@ export default function Withdrawal() {
         <div className="bg-gradient-to-br from-orange-50 via-yellow-50 to-amber-50 p-6 rounded-xl border border-orange-100 mb-6 transform hover:scale-102 transition-all">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-semibold mb-2">Available Balance</h3>
-              <p className="text-3xl font-bold mb-2">$1,234.56</p>
-              <p className="text-sm">Last withdrawal: 2023-06-20</p>
-            </div>
-            <div>
-              <h3 className="font-semibold mb-2">Pending Withdrawals</h3>
-              <p className="text-3xl font-bold mb-2">$0.00</p>
-              <p className="text-sm">Processing time: 24-48 hours</p>
+              <h3 className="font-semibold mb-2">Solde disponible</h3>
+              <p className="text-3xl font-bold mb-2">XAF1,234.56</p>
             </div>
           </div>
         </div>
 
         <Card className="bg-white p-6 rounded-xl border border-gray-200 mb-6">
-          <h2 className="text-xl font-semibold mb-6">Withdrawal Method</h2>
+          <h2 className="text-xl font-semibold mb-6">Mode de Retrait</h2>
 
           <RadioGroup onValueChange={setWithdrawalMethod} className="space-y-4">
             <div className="flex items-center gap-4 p-4 rounded-lg border border-gray-200 hover:border-orange-300 hover:bg-orange-50 cursor-pointer transition-all">
@@ -167,31 +161,38 @@ export default function Withdrawal() {
               </Select>
             </div>
           )}
+          <form onSubmit={handleWithdrawal}>
 
           <div className="mt-6 space-y-4">
             {withdrawalMethod !== "crypto" && (
               <div>
                 <Label htmlFor="accountName" className="block text-sm font-medium mb-2">
-                  Account Name
+                  Nom du Compte
                 </Label>
                 <Input
                   id="accountName"
                   type="text"
                   placeholder="Enter account holder name"
                   className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  onChange={(e) => setName(e.target.value)}
+                required
+                readOnly={loading}
                 />
               </div>
             )}
 
             <div>
               <Label htmlFor="accountNumber" className="block text-sm font-medium mb-2">
-                {withdrawalMethod === "crypto" ? "Wallet Address" : "Account Number"}
+                {withdrawalMethod === "crypto" ? "Addresse USDT TRC20" : "Numero du compte"}
               </Label>
               <Input
                 id="accountNumber"
                 type="text"
-                placeholder={withdrawalMethod === "crypto" ? "Enter wallet address" : "Enter mobile money number"}
+                onChange={(e) => setNumber(e.target.value)}
+                readOnly={loading}
+                placeholder={withdrawalMethod === "crypto" ? "Entrez votre adresse" : "Entrez votre numero de téléphone"}
                 className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                required
               />
             </div>
 
@@ -201,19 +202,23 @@ export default function Withdrawal() {
               </Label>
               <Input
                 id="amount"
+                onChange={(e) => setAmount(e.target.value)}
                 type="number"
                 placeholder="Enter amount to withdraw"
                 className="w-full px-4 py-2 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                readOnly={loading}
+                required
               />
             </div>
           </div>
 
           <div className="mt-6">
-            <Button className="w-full px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transform hover:scale-105 transition-all flex items-center justify-center gap-2">
+            <Button disabled={loading} type="submit" className="w-full px-6 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transform hover:scale-105 transition-all flex items-center justify-center gap-2">
               <span className="material-symbols-outlined">payments</span>
-              Request Withdrawal
+              Envoyer votre requete
             </Button>
           </div>
+          </form>
         </Card>
       </Card>
     </div>

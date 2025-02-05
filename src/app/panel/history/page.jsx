@@ -7,7 +7,7 @@ import { useEffect } from "react";
 
 const getStatusColor = (status) => {
   switch (status) {
-    case "completed":
+    case "success":
       return "bg-green-100 text-green-800"
     case "pending":
       return "bg-yellow-100 text-yellow-800"
@@ -54,10 +54,10 @@ export default function TransactionHistory() {
     <div className="w-full max-w-[1200px] bg-gray-50 p-4 md:p-6 rounded-xl mx-auto">
       <Card className="bg-white rounded-xl p-4 md:p-6 shadow-sm">
         <header className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">Transaction History</h1>
+          <h1 className="text-2xl font-bold text-gray-800">Historique de Transaction</h1>
           <div className="flex space-x-2">
             <Badge variant="secondary" className="bg-green-100 text-green-800">
-              Completed
+              Success
             </Badge>
             <Badge variant="secondary" className="bg-yellow-100 text-yellow-800">
               Pending
@@ -67,6 +67,8 @@ export default function TransactionHistory() {
             </Badge>
           </div>
         </header>
+      <DepositWithdrawButtons />
+
 
         <div className="space-y-4">
           {transactions.map((transaction) => (
@@ -85,7 +87,7 @@ export default function TransactionHistory() {
               </div>
               <div className="flex items-center gap-4">
                 <p className={`font-semibold ${transaction.amount > 0 ? "text-green-500" : "text-red-500"}`}>
-                  {transaction.amount > 0 ? "+" : ""}${Math.abs(transaction.amount).toFixed(2)}
+                  {transaction.amount > 0 ? "+" : ""}XAF{Math.abs(transaction.amount).toFixed(2)}
                 </p>
                 <Badge variant="secondary" className={`flex items-center gap-1 ${getStatusColor(transaction.status)}`}>
                   <span className="material-symbols-outlined text-sm">{getStatusIcon(transaction.status)}</span>

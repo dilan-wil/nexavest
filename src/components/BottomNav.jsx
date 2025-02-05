@@ -4,10 +4,10 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 
 const navItems = [
-  { icon: "home", label: "Home", href: "/panel" },
-  { icon: "payments", label: "Investment Plans", href: "/panel/invest" },
-  { icon: "share", label: "Referrals", href: "/panel/referral", badge: 2 },
-  { icon: "receipt_long", label: "History", href: "/panel/history" },
+  { icon: "home", label: "Panel", href: "/panel" },
+  { icon: "payments", label: "Investir", href: "/panel/invest" },
+  { icon: "share", label: "Equipe", href: "/panel/referral", badge: 2 },
+  { icon: "receipt_long", label: "Historique", href: "/panel/history" },
   { icon: "person", label: "Profile", href: "/panel/profile" },
 ]
 
