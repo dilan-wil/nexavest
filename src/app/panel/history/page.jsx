@@ -1,9 +1,10 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowUpRight, ArrowDownRight } from "lucide-react";
-import { DepositWithdrawButtons } from "@/components/DepositWithdrawal";
+import DepositWithdrawButtons from "@/components/DepositWithdrawal";
 import { useAuth } from "@/components/context/auth-context";
 import { useEffect } from "react";
+import { Badge } from "lucide-react";
 
 const getStatusColor = (status) => {
   switch (status) {
@@ -51,7 +52,7 @@ export default function TransactionHistory() {
   );
 
   return (
-    <div className="w-full max-w-[1200px] bg-gray-50 p-4 md:p-6 rounded-xl mx-auto">
+    <div className="w-full pb-24 max-w-[1200px] bg-gray-50 p-4 md:p-6 rounded-xl mx-auto">
       <Card className="bg-white rounded-xl p-4 md:p-6 shadow-sm">
         <header className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-800">Historique de Transaction</h1>
@@ -70,7 +71,7 @@ export default function TransactionHistory() {
       <DepositWithdrawButtons />
 
 
-        <div className="space-y-4">
+        <div className="space-y-4 mt-10">
           {transactions.map((transaction) => (
             <div
               key={transaction.id}

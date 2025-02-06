@@ -31,7 +31,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/app/admin/deposits/page.jsx", "src/app/admin/withdrawals/page.jsx", "src/app/admin/page.jsx"  ],
+, "src/app/adminss/deposits/page.jsx", "src/app/adminss/withdrawals/page.jsx", "src/app/adminss/page.jsx"  ],
   "exclude": [
     "node_modules"
   ]

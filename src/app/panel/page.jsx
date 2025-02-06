@@ -124,7 +124,7 @@ export default function Home() {
   const [loading, setLoading] = useState(false)
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
-  const { userInfo, setUserInfo, setTransactions } = useAuth();
+  const { userInfo, setUserInfo, setTransactions, transactions } = useAuth();
   const router = useRouter()
   const now = new Date();
   const { toast } = useToast()
@@ -137,56 +137,14 @@ export default function Home() {
   // Render skeleton while userInfo is null
   if (!userInfo) {
     return (
-      <div className="p-4 space-y-4 pb-20 bg-blue-50">
+      <div className="p-4 space-y-4 pb-20">
         <h1 className="text-2xl font-bold text-blue-800">Panel</h1>
-
-        <Card className="bg-white shadow-lg">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <Skeleton className="w-24 h-5" />
             <Skeleton className="h-4 w-4" />
-          </CardHeader>
-          <CardContent>
+         
             <Skeleton className="w-32 h-6 mb-2" />
             <Skeleton className="w-20 h-4" />
-          </CardContent>
-        </Card>
-
-        <div className="grid grid-cols-2 gap-4">
-          <Card className="bg-white shadow-md">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <Skeleton className="w-28 h-5" />
-              <Skeleton className="h-4 w-4" />
-            </CardHeader>
-            <CardContent>
-              <Skeleton className="w-24 h-6" />
-            </CardContent>
-          </Card>
-          <Card className="bg-white shadow-md">
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <Skeleton className="w-28 h-5" />
-              <Skeleton className="h-4 w-4" />
-            </CardHeader>
-            <CardContent>
-              <Skeleton className="w-24 h-6" />
-            </CardContent>
-          </Card>
-        </div>
-
-        <Card className="bg-white shadow-md">
-          <CardHeader>
-            <Skeleton className="w-40 h-5" />
-          </CardHeader>
-          <CardContent>
-            <ul className="space-y-2">
-              {[...Array(3)].map((_, i) => (
-                <li key={i} className="flex justify-between items-center">
-                  <Skeleton className="w-32 h-4" />
-                  <Skeleton className="w-16 h-4" />
-                </li>
-              ))}
-            </ul>
-          </CardContent>
-        </Card>
+         
       </div>
     );
   }
@@ -194,26 +152,26 @@ export default function Home() {
   return (
       <div className="w-full max-w-[1200px] mx-auto bg-gray-50 p-4 md:p-6 rounded-xl">
         <header className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2 text-black">Welcome to CryptoVest Pro</h1>
-          <p className="text-lg text-gray-600">Your gateway to smart cryptocurrency investments</p>
+          <h1 className="text-3xl md:text-4xl font-bold mb-2 text-black">Bienvenue chez NexaVest</h1>
+          {/* <p className="text-lg text-gray-600">Your gateway to smart cryptocurrency investments</p> */}
         </header>
   
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all">
             <h2 className="text-xl font-semibold mb-4 text-black">Portfolio</h2>
-            <p className="text-3xl font-bold mb-2">XAF12,345.67</p>
+            <p className="text-3xl font-bold mb-2">XAF{userInfo?.balance ?? 0}</p>
             <p className="text-sm text-gray-500">Solde</p>
-            <div className="mt-4 flex items-center">
+            {/* <div className="mt-4 flex items-center">
               <span className="text-green-500 font-semibold">+5.23%</span>
               <span className="text-gray-500 ml-2">Past 24h</span>
-            </div>
+            </div> */}
           </Card>
         <DepositWithdrawButtons />
 
   
           <Card className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all">
             <h2 className="text-xl font-semibold mb-4 text-black">Investissement en Cours</h2>
-            <p className="text-3xl font-bold mb-2">3</p>
+            <p className="text-3xl font-bold mb-2">{userInfo?.plans?.length ?? 0}</p>
             <p className="text-sm text-gray-500">Plans Actifs</p>
             <Link href="/panel/invest" className="mt-4 inline-block text-blue-500 hover:underline">
               Voir les détails
@@ -222,8 +180,8 @@ export default function Home() {
   
           <Card className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all">
             <h2 className="text-xl font-semibold mb-4 text-black">Programme d'affiliation</h2>
-            <p className="text-3xl font-bold mb-2">12</p>
-            <p className="text-sm text-gray-500">Parrains Actifs</p>
+            <p className="text-3xl font-bold mb-2">XAF{userInfo?.referralEarnings ?? 0}</p>
+            <p className="text-sm text-gray-500">Gagnés en parrainant</p>
             <Link href="/panel/referral" className="mt-4 inline-block text-blue-500 hover:underline">
               Invitez vos amis
             </Link>
@@ -248,13 +206,7 @@ export default function Home() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200">
-                {[
-                  { type: "Deposit", amount: "+$500.00", date: "2023-07-01", status: "Completed" },
-                  { type: "Withdrawal", amount: "-$200.00", date: "2023-06-28", status: "Pending" },
-                  { type: "Investment", amount: "-$1000.00", date: "2023-06-25", status: "Completed" },
-                  { type: "Deposit", amount: "+$300.00", date: "2023-06-22", status: "Failed" },
-                  { type: "Referral Bonus", amount: "+$50.00", date: "2023-06-20", status: "Completed" },
-                ].map((transaction, index) => (
+                {transactions.map((transaction, index) => (
                   <tr key={index}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{transaction.type}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -264,9 +216,9 @@ export default function Home() {
                     <td className="px-6 py-4 whitespace-nowrap">
                       <span
                         className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                          transaction.status === "Completed"
+                          transaction.status === "success"
                             ? "bg-green-100 text-green-800"
-                            : transaction.status === "Pending"
+                            : transaction.status === "pending"
                               ? "bg-yellow-100 text-yellow-800"
                               : "bg-red-100 text-red-800"
                         }`}
@@ -317,7 +269,7 @@ export default function Home() {
           <div className="mt-8 text-center">
             <Link href="/panel/invest" passHref>
               <Button variant="outline" size="lg">
-                View All Plans
+                Voir tout les plans
               </Button>
             </Link>
           </div>

@@ -51,6 +51,8 @@ export async function addDeposit({
       charge: 0,
       status: "pending", // Initially pending
       method: gateway,
+      icon: "payments",
+      iconBg: "bg-green-100",
       date: new Date().toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }),
     };
 

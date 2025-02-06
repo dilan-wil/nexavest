@@ -114,19 +114,19 @@ export default function Referral() {
   }
 
   return (
-    <div className="w-full max-w-[1200px] bg-gray-50 p-4 md:p-6 rounded-xl mx-auto">
+    <div className="w-full max-w-[1200px] pb-24 bg-gray-50 p-4 md:p-6 rounded-xl mx-auto">
       <Card className="bg-white rounded-xl p-4 md:p-6 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
-          <h1 className="text-2xl font-bold">Your Referral Dashboard</h1>
+          <h1 className="text-2xl font-bold">Votre panel de parrainage</h1>
           <div className="relative">
             <details className="group">
               <summary className="flex items-center gap-2 cursor-pointer list-none px-4 py-2 rounded-lg hover:bg-gray-50">
                 <span className="material-symbols-outlined">help</span>
-                How it works
+                Comment ça marche
               </summary>
               <div className="absolute right-0 mt-2 w-64 p-4 bg-white rounded-xl shadow-lg border border-gray-100 z-10">
                 <p className="text-sm">
-                  Earn rewards by referring others! Get up to 3 levels deep of referral bonuses.
+                  Gagnez une commission en parainnant vos amis jusqu'à 3 niveaux
                 </p>
               </div>
             </details>
@@ -134,7 +134,7 @@ export default function Referral() {
         </div>
 
         <div className="bg-gray-50 p-4 md:p-6 rounded-xl mb-6">
-          <h2 className="text-lg font-semibold mb-4">Your Referral Link</h2>
+          <h2 className="text-lg font-semibold mb-4">Votre lien de parrainage</h2>
           <div className="flex flex-col md:flex-row gap-4">
             <Input
               type="text"
@@ -162,16 +162,16 @@ export default function Referral() {
           <Card className="bg-gradient-to-br from-blue-50 via-purple-50 to-emerald-50 p-6 rounded-xl border border-blue-100 transform hover:scale-102 transition-all">
             <div className="flex justify-between items-center">
               <div>
-                <h3 className="font-semibold mb-2">Level 1</h3>
+                <h3 className="font-semibold mb-2">Niveau 1</h3>
                 <p className="text-3xl font-bold mb-2">15%</p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Level 2</h3>
-                <p className="text-3xl font-bold mb-2">10%</p>
+                <h3 className="font-semibold mb-2">Niveau 2</h3>
+                <p className="text-3xl font-bold mb-2">6%</p>
               </div>
               <div>
-                <h3 className="font-semibold mb-2">Level 3</h3>
-                <p className="text-3xl font-bold mb-2">5%</p>
+                <h3 className="font-semibold mb-2">NIveau 3</h3>
+                <p className="text-3xl font-bold mb-2">3%</p>
               </div>
             </div>
           </Card>

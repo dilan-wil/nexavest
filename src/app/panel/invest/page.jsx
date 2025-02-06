@@ -17,96 +17,99 @@ import { useToast } from '@/hooks/use-toast'
 import addReferralBonus from '@/functions/add-referral-bonus'
 
 const plans = [
-  // Basic Plans
   {
     id: 1,
     name: "Starter Plan",
     type: "Basic",
-    price: 100,
-    dailyRevenue: 0.17,
+    price: 2500,
+    dailyRevenue: 300,
     period: 30,
-    totalRevenue: 105,
     icon: "savings",
-    color: "blue",
+    color: "bg-blue-600",
+    // text1: "text-blue-600",
+    // color: "bg-blue-600",
+    // color: "bg-blue-600",
   },
   {
     id: 2,
     name: "Basic Growth",
     type: "Basic",
-    price: 250,
-    dailyRevenue: 0.42,
+    price: 5000,
+    dailyRevenue: 600,
     period: 30,
-    totalRevenue: 262.5,
     icon: "trending_up",
-    color: "blue",
+    color: "bg-blue-600",
   },
   {
     id: 3,
     name: "Basic Plus",
     type: "Basic",
-    price: 500,
-    dailyRevenue: 0.83,
+    price: 10000,
+    dailyRevenue: 1200,
     period: 30,
     totalRevenue: 525,
     icon: "add_chart",
-    color: "blue",
+    color: "bg-blue-600",
   },
-  // Pro Plans
   {
     id: 4,
     name: "Pro Starter",
     type: "Pro",
-    price: 1000,
-    dailyRevenue: 2.67,
+    price: 20000,
+    dailyRevenue: 2400,
     period: 30,
-    totalRevenue: 1080,
     icon: "trending_up",
-    color: "indigo",
+    color: "bg-indigo-600",
   },
   {
     id: 5,
     name: "Pro Growth",
     type: "Pro",
-    price: 2500,
-    dailyRevenue: 6.67,
-    period: 30,
-    totalRevenue: 2700,
-    icon: "show_chart",
-    color: "indigo",
+    price: 50000,
+    dailyRevenue: 6000,
+    period: 30,    icon: "show_chart",
+    color: "bg-indigo-600",
   },
   {
     id: 6,
     name: "Pro Plus",
     type: "Pro",
-    price: 5000,
-    dailyRevenue: 13.33,
+    price: 100000,
+    dailyRevenue: 12000,
     period: 30,
-    totalRevenue: 5400,
     icon: "analytics",
-    color: "indigo",
+    color: "bg-indigo-600",
   },
-  // Premium Plans
   {
     id: 7,
     name: "Elite Plan",
     type: "Premium",
-    price: 10000,
-    dailyRevenue: 40,
+    price: 250000,
+    dailyRevenue: 24000,
     period: 30,
-    totalRevenue: 12000,
     icon: "diamond",
-    color: "purple",
+    color: "bg-purple-600",
   },
   {
     id: 8,
     name: "VIP Plan",
     type: "Premium",
-    price: 25000,
-    dailyRevenue: 100,
+    price: 500000,
+    dailyRevenue: 60000,
+    period: 30,
+    icon: "workspace_premium",
+    color: "bg-purple-600",
+  },
+  {
+    id: 9,
+    name: "VVIP Plan",
+    type: "Premium",
+    price: 1000000,
+    dailyRevenue: 120000,
     period: 30,
     totalRevenue: 30000,
     icon: "workspace_premium",
-    color: "purple",
+    color: "bg-purple-600",
   },
 ]
 
@@ -141,30 +144,26 @@ export default function Investments() {
     setLoading(true)
     if (!userInfo?.uid || !selectedPlan) return;
 
-    if (userInfo.balance < selectedPlan.prix) {
+    if (userInfo.balance < selectedPlan.price) {
       toast({
         variant: "destructive",
         title: "Solde Insuffisant.",
         description: "Veuillez Rechargez votre compte pour payer ce plan.",
       })
-      router.push("/d/deposit");
+      router.push("/panel/deposit");
       return;
     }
 
     try {
       const userDocRef = doc(db, "users", userInfo.uid);
-      const newBalance = userInfo.balance - selectedPlan.prix;
+      const newBalance = userInfo.balance - selectedPlan.price;
 
       const newPlan = {
-        id: selectedPlan.id,
         instanceId: uuidv4(),
-        name: selectedPlan.name,
-        prix: selectedPlan.prix,
-        daily: selectedPlan.daily,
+        ...selectedPlan,
         purchaseDate: new Date().toISOString(),
-        times: 40,
+        times: 30,
         lastClicked: now.toISOString(),
-        image: selectedPlan.image
       };
 
       await updateDoc(userDocRef, {
@@ -177,10 +176,12 @@ export default function Investments() {
         description: `Achat du plan ${selectedPlan.name}`,
         transactionId: selectedPlan.name,
         type: "Achat",
-        amount: -selectedPlan.prix,
+        amount: -selectedPlan.price,
         charge: 0,
         status: "success",
         method: "system",
+        icon: "shopping_bag",
+        iconBg: "bg-blue-100",
         date: new Date().toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }),
       }
 
@@ -191,7 +192,7 @@ export default function Investments() {
       setTransactions((prevTransactions) => [...prevTransactions, newTransaction]);
 
       if (!userInfo.plans) {
-        await addReferralBonus(userInfo.referredBy, selectedPlan.prix)
+        await addReferralBonus(userInfo.referredBy, selectedPlan.price)
       }
 
       toast({
@@ -264,7 +265,7 @@ export default function Investments() {
       });
   
       const totalDailyEarnings = availablePlans.reduce(
-        (sum, p) => sum + (p.id === plan.id ? p.daily : 0),
+        (sum, p) => sum + (p.id === plan.id ? p.dailyRevenue : 0),
         0
       );
   
@@ -296,6 +297,8 @@ export default function Investments() {
         charge: 0,
         status: "success",
         method: "system",
+        icon: "task_alt",
+        iconBg: "bg-purple-100",
         date: new Date().toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }),
       };
   
@@ -331,7 +334,7 @@ export default function Investments() {
   // }
 
   return (
-    <div className="space-y-6 max-w-6xl mx-auto">
+    <div className="space-y-6 pb-24 max-w-6xl mx-auto">
       <h1 className="text-3xl font-bold mb-8">Investment Plans</h1>
 
       <div className="bg-white rounded-2xl shadow-sm p-4 md:p-6 overflow-hidden mb-8">
@@ -343,7 +346,7 @@ export default function Investments() {
               }`}
               onClick={() => setShowActivePlans(false)}
             >
-              All Plans
+              Tout les plans
             </button>
             <button
               className={`px-6 py-2.5 rounded-lg font-medium transition-all duration-300 ${
@@ -351,7 +354,7 @@ export default function Investments() {
               }`}
               onClick={() => setShowActivePlans(true)}
             >
-              Active Plans
+              Mes plans
             </button>
           </div>
         </div>
@@ -373,48 +376,73 @@ export default function Investments() {
                 </span>
               </div>
               <h3 className="text-xl font-bold mb-2 text-gray-800">{plan.name}</h3>
-              <p className="text-gray-600 mb-4">Investment: ${plan.price}</p>
+              <p className="text-gray-600 mb-4">Investissement: XAF{plan.price}</p>
               <div className="text-3xl font-bold mb-6 text-gray-800">
-                ${plan.dailyRevenue.toFixed(2)}
-                <span className="text-sm text-gray-500 font-normal">/day</span>
+                XAF{plan.dailyRevenue.toFixed(2)}
+                <span className="text-sm text-gray-500 font-normal">/jours</span>
               </div>
-              <p className="text-gray-600 mb-2">Period: {plan.period} days</p>
-              <p className="text-gray-600 mb-4">Total Revenue: ${plan.totalRevenue}</p>
+              <p className="text-gray-600 mb-2">Periode: {plan.period} jours</p>
+              <p className="text-gray-600 mb-4">Revenus Total: XAF{plan.dailyRevenue * plan.period}</p>
               <button
-                className={`w-full bg-${plan.color}-600 hover:bg-${plan.color}-700 text-white py-3 rounded-xl font-medium transform hover:scale-105 transition-all duration-300`}
+                onClick={() => handleBuyClick(plan)} disabled={loading}
+                className={`w-full ${plan.color} hover:bg-${plan.color}-700 text-white py-3 rounded-xl font-medium transform hover:scale-105 transition-all duration-300`}
               >
-                Invest Now
+                Investir
               </button>
             </article>
           ))}
         </section>
       ) : (
         <section>
-          <h2 className="text-2xl font-bold mb-6">Active Investments</h2>
+          <h2 className="text-2xl font-bold mb-6">Investissement actifs</h2>
           <div className="space-y-4">
-            {activePlans.map((plan) => (
+            {userPLans.map((plan) => (
               <article
-                key={plan.id}
-                className="bg-white rounded-xl shadow-sm hover:shadow-lg p-6 transition-all duration-300"
+              key={plan.id}
+              className={`bg-gradient-to-br from-${plan.color}-100 to-white p-6 rounded-xl border border-${plan.color}-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}
+            >
+              <div className="flex justify-between items-center mb-6">
+                <span className={`material-symbols-outlined text-${plan.color}-600 text-3xl`}>{plan.icon}</span>
+                <span
+                  className={`bg-${plan.color}-200 text-${plan.color}-800 px-3 py-1 rounded-full text-sm font-medium`}
+                >
+                  {plan.type}
+                </span>
+              </div>
+              <h3 className="text-xl font-bold mb-2 text-gray-800">{plan.name}</h3>
+              <p className="text-gray-600 mb-4">Investissement: XAF{plan.price}</p>
+              <div className="text-3xl font-bold mb-6 text-gray-800">
+                XAF{plan.dailyRevenue.toFixed(2)}
+                <span className="text-sm text-gray-500 font-normal">/day</span>
+              </div>
+              <p className="text-gray-600 mb-2">Période Restante: {plan.times} days</p>
+              <p className="text-gray-600 mb-4">Revenus Restant: XAF{plan.dailyRevenue * plan.period}</p>
+              <button
+                onClick={() => handleTaskClick({ dailyRevenue: plan.dailyRevenue, id: plan.id, instanceId: plan.instanceId, lastClicked: plan.lastClicked, name: plan.name, price: plan.price, purchaseDate: plan.purchaseDate, times: plan.times })} 
+                disabled={loading} 
+                className={`w-full ${plan.color} hover:bg-${plan.color}-700 text-white py-3 rounded-xl font-medium transform hover:scale-105 transition-all duration-300`}
               >
-                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                  <div className="flex items-center gap-4">
-                    <span className={`material-symbols-outlined text-${plan.color}-500 text-2xl`}>{plan.icon}</span>
-                    <div>
-                      <h4 className="font-semibold">{plan.name}</h4>
-                      <p className="text-gray-500">Invested: ${plan.invested.toLocaleString()}</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="font-bold text-green-500">+${plan.returns.toLocaleString()}</p>
-                    <p className="text-gray-500">Returns</p>
-                  </div>
-                </div>
-              </article>
+                Completez la tache
+              </button>
+            </article>
             ))}
           </div>
         </section>
       )}
+      <AlertDialog open={isDialogOpen} onOpenChange={setDialogOpen}>
+        <AlertDialogContent className="bg-white p-6 rounded-lg shadow-lg max-w-md mx-auto">
+          <AlertDialogHeader>
+            <h2 className="text-lg font-semibold">Confirmer l'Achat</h2>
+          </AlertDialogHeader>
+          <p className="text-gray-700">Confirmez votre l'achat du plan {selectedPlan?.name}</p>
+          <AlertDialogFooter className="mt-4 flex justify-end space-x-2">
+            <AlertDialogCancel onClick={() => setDialogOpen(false)} className="text-red-600">Annuler</AlertDialogCancel>
+            <AlertDialogAction disabled={loading} onClick={confirmPurchase} className="bg-blue-600 text-white hover:bg-blue-700">
+              Confirmer
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

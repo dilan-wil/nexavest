@@ -11,7 +11,7 @@ const navItems = [
   { icon: "person", label: "Profile", href: "/panel/profile" },
 ]
 
-export default function BottomNav() {
+export default function BottomNav(ref) {
   const pathname = usePathname()
 
   return (
@@ -29,7 +29,7 @@ export default function BottomNav() {
               </span>
               {item.badge && (
                 <span className="absolute -top-2 -right-2 bg-rose-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">
-                  {item.badge}
+                  {ref.number}
                 </span>
               )}
             </div>

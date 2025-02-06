@@ -67,6 +67,8 @@ export async function askWithdrawal(userId, gateway, amount, numero, nom,userInf
         charge: 0,
         status: "pending",
         method: gateway,
+        icon: "account_balance_wallet",
+        iconBg: "bg-red-100",
         date: new Date().toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" }),
         icon: "icon-money-change",
         }

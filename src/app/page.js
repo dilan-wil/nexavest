@@ -4,7 +4,7 @@ export default function AboutUs() {
       <header className="relative py-12 md:py-20 bg-gradient-to-r from-blue-900 to-indigo-900">
         <div className="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1639762681485-074b7f938ba0?ixlib=rb-4.0.3')] bg-cover bg-center" />
         <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-3xl md:text-5xl font-bold mb-4">CryptoVest Pro</h1>
+          <h1 className="text-3xl md:text-5xl font-bold mb-4">NexaVest Pro</h1>
           <p className="text-lg md:text-xl">Pionnier de l'Avenir de l'Investissement en Actifs Numériques</p>
         </div>
       </header>
@@ -14,8 +14,8 @@ export default function AboutUs() {
           <div className="space-y-6">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">Qui Sommes-Nous</h2>
             <p className="text-base md:text-lg">
-              CryptoVest Pro est une société leader d'investissement en cryptomonnaies dédiée à fournir des solutions de
-              gestion d'actifs numériques de qualité institutionnelle. Fondée en 2018, nous avons constamment offert des
+              NexaVest Pro est une société leader d'investissement en cryptomonnaies dédiée à fournir des solutions de
+              gestion d'actifs numériques de qualité institutionnelle. <b>Fondée Mercredi le 5 février 2025</b>, nous avons constamment offert des
               rendements exceptionnels tout en maintenant les plus hauts standards de sécurité et de conformité. Notre
               équipe d'experts combine une connaissance approfondie du marché avec une technologie de pointe pour
               maximiser le potentiel d'investissement.
@@ -34,14 +34,6 @@ export default function AboutUs() {
                 <p className="mt-2 text-sm md:text-base">Surveillance du Marché</p>
               </div>
             </div>
-          </div>
-          <div className="relative group">
-            <img
-              src="https://webcrumbs.cloud/placeholder"
-              alt="Tableau de Bord de Trading"
-              className="rounded-lg shadow-xl transition-transform group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-blue-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-lg" />
           </div>
         </div>
       </section>
@@ -78,4 +70,3 @@ export default function AboutUs() {
     </div>
   )
 }
-

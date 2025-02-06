@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Helionix Investment",
-  description: "Découvrez Helionix – votre passerelle vers l'investissement dans les énergies renouvelables. Apprenez-en plus sur notre mission de démocratiser l'accès à l'énergie solaire, éolienne, hydroélectrique et aux innovations vertes. Explorez notre histoire, nos projets et notre vision pour un avenir durable grâce à des opportunités d'investissement intelligentes, transparentes et accessibles.",
+  title: "NexaVest Pro",
+  description: "Pionnier de l'Avenir de l'Investissement en Actifs Numériques.",
   icons: {
     icon: "/helionixIcon.png"
   }
