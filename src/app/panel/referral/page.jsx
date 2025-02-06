@@ -21,14 +21,14 @@ export default function Referral() {
 
   useEffect(() => {
     if (userInfo?.uid) {
-      setReferralLink(`https://helionix.vercel.app/register?code=${userInfo?.uid}`);
+      setReferralLink(`https://nexavest.onrender.com/signup?code=${userInfo?.uid}`);
     }
   }, [userInfo]);
 
   const copyLink = async () => {
     try {
       await navigator.clipboard.writeText(referralLink);
-      setCopied(true);
+      setCopiedLink(true);
       setTimeout(() => setCopied(false), 2000); // Reset after 2 seconds
     } catch (err) {
       console.error("Failed to copy the referral link: ", err);
@@ -133,9 +133,9 @@ export default function Referral() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <Card className="bg-gradient-to-br from-blue-50 via-purple-50 to-emerald-50 p-6 rounded-xl border border-blue-100 transform hover:scale-102 transition-all">
-            <h3 className="font-semibold mb-2">Referral Earnings</h3>
-            <p className="text-3xl font-bold mb-2">$1,234.56</p>
-            <p className="text-sm">Total earnings from referrals</p>
+            <h3 className="font-semibold mb-2">Gains de parrainage</h3>
+            <p className="text-3xl font-bold mb-2">XAF{userInfo?.referralEarnings ?? 0}</p>
+            <p className="text-sm">Totals gagnés en parrainant</p>
           </Card>
 
           <Card className="bg-gradient-to-br from-blue-50 via-purple-50 to-emerald-50 p-6 rounded-xl border border-blue-100 transform hover:scale-102 transition-all">
@@ -180,7 +180,7 @@ export default function Referral() {
                   <table className="w-full min-w-[500px]">
                     <thead className="text-left bg-gray-50">
                       <tr>
-                        <th className="p-3 rounded-l-lg">User</th>
+                        <th className="p-3 rounded-l-lg">Utilisateur</th>
                         <th className="p-3">Date</th>
                         <th className="p-3 rounded-r-lg">Earnings</th>
                       </tr>
