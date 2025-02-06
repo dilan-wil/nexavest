@@ -335,7 +335,7 @@ export default function Investments() {
 
   return (
     <div className="space-y-6 pb-24 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-bold mb-8">Investment Plans</h1>
+      <h1 className="text-3xl text-white font-bold mb-8">Investment Plans</h1>
 
       <div className="bg-white rounded-2xl shadow-sm p-4 md:p-6 overflow-hidden mb-8">
         <div className="flex items-center justify-center mb-6">
@@ -365,7 +365,7 @@ export default function Investments() {
           {plans.map((plan) => (
             <article
               key={plan.id}
-              className={`bg-gradient-to-br from-${plan.color}-100 to-white p-6 rounded-xl border border-${plan.color}-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}
+              className={`bg-white p-6 rounded-xl border border-${plan.color}-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}
             >
               <div className="flex justify-between items-center mb-6">
                 <span className={`material-symbols-outlined text-${plan.color}-600 text-3xl`}>{plan.icon}</span>

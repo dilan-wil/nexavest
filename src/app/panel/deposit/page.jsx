@@ -77,7 +77,7 @@ export default function Deposit() {
   };
 
   return (
-    <div className="w-full pb-24 max-w-[1200px] bg-gray-100 p-4 md:p-6 rounded-xl mx-auto">
+    <div className="w-full pb-24 max-w-[1200px] p-4 md:p-6 rounded-xl mx-auto">
       <Card className="bg-white rounded-xl p-4 md:p-6 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
           <h1 className="text-2xl font-bold">Dépot</h1>

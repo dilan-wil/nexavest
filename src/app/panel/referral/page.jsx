@@ -6,6 +6,7 @@ import { useAuth } from "@/components/context/auth-context";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { listenToSubCollection } from "../../../functions/get-a-sub-collection";
+import { Input } from "@/components/ui/input"
 
 const referralLevels = [
   { level: 1, count: 5, earnings: 100 },
@@ -14,10 +15,9 @@ const referralLevels = [
 ];
 
 export default function Referral() {
-  const { userInfo, user } = useAuth();
+  const { userInfo, user, referrals } = useAuth();
   const [copiedLink, setCopiedLink] = useState(false)
   const [referralLink, setReferralLink] = useState("");
-  const [referrals, setReferrals] = useState([])
 
   useEffect(() => {
     if (userInfo?.uid) {
@@ -45,27 +45,6 @@ export default function Referral() {
       console.error("Failed to share the referral link: ", err);
     }
   };
-
-
-  useEffect(() => {
-    if (!user) {
-      console.error("User is not authenticated")
-      return
-    }
-
-    const unsubscribe = listenToSubCollection("users", user.uid, "referrals", setReferrals);
-
-    // Cleanup listener on component unmount
-    return () => {
-      if (unsubscribe) unsubscribe();
-    };
-
-  }, [user, setReferrals])
-
-  useEffect(() => {
-    console.log(referrals)
-  }, [user, referrals])
-
 
   if (!userInfo) {
     return (
@@ -114,7 +93,7 @@ export default function Referral() {
   }
 
   return (
-    <div className="w-full max-w-[1200px] pb-24 bg-gray-50 p-4 md:p-6 rounded-xl mx-auto">
+    <div className="w-full max-w-[1200px] pb-24 p-4 md:p-6 rounded-xl mx-auto">
       <Card className="bg-white rounded-xl p-4 md:p-6 shadow-sm">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
           <h1 className="text-2xl font-bold">Votre panel de parrainage</h1>
@@ -143,7 +122,7 @@ export default function Referral() {
               readOnly
             />
             <Button
-              onClick={copyToClipboard}
+              onClick={copyLink}
               className="px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transform hover:scale-105 transition-all flex items-center justify-center gap-2"
             >
               <span className="material-symbols-outlined">content_copy</span>

@@ -52,7 +52,7 @@ export default function TransactionHistory() {
   );
 
   return (
-    <div className="w-full pb-24 max-w-[1200px] bg-gray-50 p-4 md:p-6 rounded-xl mx-auto">
+    <div className="w-full pb-24 max-w-[1200px] p-4 md:p-6 rounded-xl mx-auto">
       <Card className="bg-white rounded-xl p-4 md:p-6 shadow-sm">
         <header className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-gray-800">Historique de Transaction</h1>

@@ -150,9 +150,9 @@ export default function Home() {
   }
 
   return (
-      <div className="w-full max-w-[1200px] mx-auto bg-gray-50 p-4 md:p-6 rounded-xl">
+      <div className="w-full max-w-[1200px] mx-auto p-4 md:p-6 rounded-xl">
         <header className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-2 text-black">Bienvenue chez NexaVest</h1>
+          <h1 className="text-3xl md:text-4xl font-bold mb-2 text-white">Bienvenue chez NexaVest</h1>
           {/* <p className="text-lg text-gray-600">Your gateway to smart cryptocurrency investments</p> */}
         </header>
   

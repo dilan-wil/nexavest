@@ -59,7 +59,7 @@ export default function DashboardLayout({ children }) {
 
   return (
     <ProtectedRoute>
-      <div className={`${inter.className} pb-30 flex flex-col min-h-screen`}>
+      <div className={`${inter.className} bg-gradient-to-br from-blue-900 to-black pb-30 flex flex-col min-h-screen`}>
         {children}
         <WhatsAppButton />
         <BottomNav number={referrals?.length ?? 0}/>
