@@ -54,7 +54,7 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <Card className="w-full max-w-md p-8">
-        <h1 className="text-2xl font-bold text-center mb-6">Login to CryptoVest Pro</h1>
+        <h1 className="text-2xl font-bold text-center mb-6">Se connecter NexaVest Pro</h1>
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <Label htmlFor="email">Email</Label>
