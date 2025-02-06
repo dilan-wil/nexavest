@@ -17,7 +17,7 @@ export const metadata = {
   title: "NexaVest Pro",
   description: "Pionnier de l'Avenir de l'Investissement en Actifs Numériques.",
   icons: {
-    icon: "/helionixIcon.png"
+    icon: "/logo.png"
   }
 };
 
