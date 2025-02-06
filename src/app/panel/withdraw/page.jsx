@@ -62,11 +62,11 @@ export default function Withdrawal() {
         description: "Votre requete a été envoyée. Vous recevrez vos fonds dans un délai de 24h.",
       });
     } catch (error) {
-      if (error instanceof Error && error.message === "Amount must be greater than 1000.") {
+      if (error instanceof Error && error.message === "Amount must be greater than 1500.") {
         toast({
           variant: "destructive",
           title: "Erreur de retrait.",
-          description: "Le montant minimum de retrait est de 1000.",
+          description: "Le montant minimum de retrait est de 1500.",
         });
       } else if (error instanceof Error && error.message === "You need a plan") {
         toast({
@@ -113,7 +113,7 @@ export default function Withdrawal() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <h3 className="font-semibold mb-2">Solde disponible</h3>
-              <p className="text-3xl font-bold mb-2">XAF1,234.56</p>
+              <p className="text-3xl font-bold mb-2">XAF{userInfo?.balance ?? 0}</p>
             </div>
           </div>
         </div>

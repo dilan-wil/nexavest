@@ -399,7 +399,7 @@ export default function Investments() {
             {userPLans.map((plan) => (
               <article
               key={plan.id}
-              className={`bg-gradient-to-br from-${plan.color}-100 to-white p-6 rounded-xl border border-${plan.color}-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}
+              className={`bg-white p-6 rounded-xl border border-${plan.color}-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}
             >
               <div className="flex justify-between items-center mb-6">
                 <span className={`material-symbols-outlined text-${plan.color}-600 text-3xl`}>{plan.icon}</span>

@@ -110,7 +110,7 @@ export default function Deposit() {
               <RadioGroupItem value="crypto" id="crypto" className="w-4 h-4 accent-blue-500" />
               <Label htmlFor="crypto" className="flex items-center gap-3 cursor-pointer">
                 <span className="material-symbols-outlined text-blue-500">currency_bitcoin</span>
-                Crypto Monnaie
+                Crypto Monnaie (+20%)
               </Label>
             </div>
           </RadioGroup>
@@ -134,10 +134,10 @@ export default function Deposit() {
                     <div className="rounded-lg bg-blue-50 p-4">
                        <div className="space-y-2">
                             <p className="text-sm">
-                                Nom du Compte: <span className="font-semibold">{mobileProvider === "orange" ? "Pagniol Dublece Tchonmo" : "+225 9876543210"}</span>
+                                Nom du Compte: <span className="font-semibold">{mobileProvider === "orange" ? "Pagniol Dublece Tchonmo" : "Helene Choungo epse Zebaze"}</span>
                             </p>
                             <p className="text-sm">
-                                Numero du compte: <span className="font-semibold">{mobileProvider === "orange" ? "656408222" : ""}</span>
+                                Numero du compte: <span className="font-semibold">{mobileProvider === "orange" ? "656408222" : "678579362"}</span>
                             </p>
                             <p className="text-sm">
                                 Réseau: <span className="font-semibold">{mobileProvider === "orange" ? "Orange Money" : "MTM Momo"}</span>
@@ -217,14 +217,6 @@ export default function Deposit() {
                             </p>
                         </div>
                     </div>
-                    <Label className="block text-sm font-medium mb-2">Adresse Portefeuille:</Label>
-                    <p className="font-bold break-all">
-                      {crypto === "btc"
-                        ? "1BvBMSEYstWetqTFn5Au4m4GFg7xJaNVN2"
-                        : crypto === "eth"
-                          ? "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"
-                          : "0x742d35Cc6634C0532925a3b844Bc454e4438f44e"}
-                    </p>
                   </div>
                   <form onSubmit={handleAddMoney}> 
                   <div>

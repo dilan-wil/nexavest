@@ -32,7 +32,8 @@ export async function signup(formData) {
       name,
       referredBy: referralCode || null,
       referralEarnings: 0,
-      balance: 0,
+      balance: 500,
+      show: false,
       createdAt: serverTimestamp(),
     });
 

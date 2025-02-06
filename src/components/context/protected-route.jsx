@@ -16,7 +16,7 @@ const ProtectedRoute = ({ children }) => {
   }, [user, loading, router]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <p></p>;
   }
 
   return user ? <>{children}</> : null;

@@ -16,6 +16,7 @@ import { v4 as uuidv4 } from "uuid"; // Import if using the uuid library
 import { useToast } from '@/hooks/use-toast'
 import addReferralBonus from '@/functions/add-referral-bonus'
 import Link from "next/link";
+import {updateADoc} from "@/functions/update-document"
 
 const plans = [
   {
@@ -122,9 +123,10 @@ const plans = [
 
 export default function Home() {
   const [loading, setLoading] = useState(false)
+  const [show, setShow] = useState(false)
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [selectedPlan, setSelectedPlan] = useState(null);
-  const { userInfo, setUserInfo, setTransactions, transactions } = useAuth();
+  const { userInfo, setUserInfo, setTransactions, transactions, user } = useAuth();
   const router = useRouter()
   const now = new Date();
   const { toast } = useToast()
@@ -133,6 +135,16 @@ export default function Home() {
     console.log(userInfo);
   }, [userInfo]);
 
+  useEffect(() => {
+    if (!user) {
+      console.error("User is not authenticated")
+      return
+    }
+    if(!userInfo?.show) {
+      setShow(true)
+      updateADoc(user.uid, {show: true})
+    }
+  })
 
   // Render skeleton while userInfo is null
   if (!userInfo) {
@@ -155,6 +167,46 @@ export default function Home() {
           <h1 className="text-3xl md:text-4xl font-bold mb-2 text-white">Bienvenue chez NexaVest</h1>
           {/* <p className="text-lg text-gray-600">Your gateway to smart cryptocurrency investments</p> */}
         </header>
+
+        {show && 
+          <div id="webcrumbs"> 
+        	<div className="min-h-screen w-full bg-gray-50 flex items-center justify-center">
+	    <div className="w-[400px] bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative">
+	        <button onClick={() => setShow(false)} className="absolute top-4 right-4 rounded-full hover:bg-gray-100 p-2 transition-colors duration-300">
+	            <span className="material-symbols-outlined text-gray-400 hover:text-gray-600 transition-colors duration-300">
+	                close
+	            </span>
+	        </button>
+	        <div className="flex flex-col items-center gap-4">
+	            <span className="material-symbols-outlined text-6xl text-green-500 hover:scale-110 transition-transform duration-300">
+	                celebration
+	            </span>
+	            <h2 className="text-2xl font-semibold text-center">
+	                Félicitations!
+	            </h2>
+	            <p className="text-center text-gray-600">
+	                Vous avez reçu
+	            </p>
+	            <div className="text-4xl font-bold text-green-500 hover:scale-105 transition-transform duration-300">
+	                500 FCFA
+	            </div>
+	            <p className="text-center text-gray-600">
+	                de bienvenue
+	            </p>
+	            <div className="w-full h-[2px] bg-gray-100 my-2"></div>
+	            <div className="flex items-center gap-2 hover:bg-gray-50 p-2 rounded-lg transition-colors duration-300 cursor-pointer">
+	                <span className="material-symbols-outlined text-green-500">
+	                    gift
+	                </span>
+	                <p className="text-sm text-gray-500">
+	                    Bonus de bienvenue
+	                </p>
+	            </div>
+	        </div>
+	    </div>
+	</div> 
+        </div>
+        }
   
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <Card className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-all">
@@ -239,7 +291,7 @@ export default function Home() {
             {plans.map((plan) => (
               <Card
                 key={plan.id}
-                className={`bg-gradient-to-br from-${plan.color}-100 to-white p-6 rounded-xl border border-${plan.color}-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}
+                className={`bg-white p-6 rounded-xl border border-${plan.color}-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1`}
               >
                 <div className="flex justify-between items-center mb-6">
                   <span className={`material-symbols-outlined text-${plan.color}-600 text-3xl`}>{plan.icon}</span>

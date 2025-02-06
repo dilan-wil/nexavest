@@ -9,8 +9,8 @@ const addReferralBonus = async (level1ReferrerCode, depositAmount) => {
       if (level1ReferrerRef.exists()) {
         // Update level 1 referrer's referral earnings with 30% of the deposit
         await updateDoc(doc(db, "users", level1ReferrerCode), {
-          referralEarnings: increment(depositAmount * 0.2),
-          balance: increment(depositAmount * 0.2),
+          referralEarnings: increment(depositAmount * 0.15),
+          balance: increment(depositAmount * 0.15),
         });
 
         // Fetch level 2 referrer's code from level 1 referrer
@@ -20,8 +20,8 @@ const addReferralBonus = async (level1ReferrerCode, depositAmount) => {
           if (level2ReferrerRef.exists()) {
             // Update level 2 referrer's referral earnings with 3% of the deposit
             await updateDoc(doc(db, "users", level2ReferrerCode), {
-              referralEarnings: increment(depositAmount * 0.03),
-              balance: increment(depositAmount * 0.03),
+              referralEarnings: increment(depositAmount * 0.06),
+              balance: increment(depositAmount * 0.06),
         });
 
             // Fetch level 3 referrer's code from level 2 referrer
@@ -31,8 +31,8 @@ const addReferralBonus = async (level1ReferrerCode, depositAmount) => {
               if (level3ReferrerRef.exists()) {
                 // Update level 3 referrer's referral earnings with 1% of the deposit
                 await updateDoc(doc(db, "users", level3ReferrerCode), {
-                  referralEarnings: increment(depositAmount * 0.01),
-                  balance: increment(depositAmount * 0.01),
+                  referralEarnings: increment(depositAmount * 0.03),
+                  balance: increment(depositAmount * 0.03),
                 });
               }
             }
