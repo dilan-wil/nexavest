@@ -157,7 +157,7 @@ export default function Referral() {
         </div>
 
         <div className="space-y-6">
-          {["Level 1 Referrals (24)", "Level 2 Referrals (156)", "Level 3 Referrals (892)"].map((level, index) => (
+          {[`Level 1 Referrals (${referrals?.length ?? 0})`].map((level, index) => (
             <div
               key={index}
               className="bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-md transition-all"
@@ -186,16 +186,12 @@ export default function Referral() {
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-100">
-                      <tr className="hover:bg-gray-50">
-                        <td className="p-3">John Doe</td>
-                        <td className="p-3">2023-05-15</td>
-                        <td className="p-3">$125.50</td>
-                      </tr>
-                      <tr className="hover:bg-gray-50">
-                        <td className="p-3">Jane Smith</td>
-                        <td className="p-3">2023-05-14</td>
-                        <td className="p-3">$98.75</td>
-                      </tr>
+                      {referrals?.map((ref) => (
+                        <tr className="hover:bg-gray-50">
+                          <td className="p-3">{ref.name}</td>
+                          <td className="p-3">Fev 2025</td>
+                        </tr>
+                      ))}
                     </tbody>
                   </table>
                 </div>
