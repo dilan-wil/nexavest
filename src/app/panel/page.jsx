@@ -144,7 +144,7 @@ export default function Home() {
       setShow(true)
       updateADoc(user.uid, {show: true})
     }
-  })
+  }, [user, userInfo])
 
   // Render skeleton while userInfo is null
   if (!userInfo) {
@@ -170,7 +170,7 @@ export default function Home() {
 
         {show && 
           <div id="webcrumbs"> 
-        	<div className="min-h-screen w-full bg-gray-50 flex items-center justify-center">
+        	<div className="min-h-screen w-full flex items-center justify-center">
 	    <div className="w-[400px] bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative">
 	        <button onClick={() => setShow(false)} className="absolute top-4 right-4 rounded-full hover:bg-gray-100 p-2 transition-colors duration-300">
 	            <span className="material-symbols-outlined text-gray-400 hover:text-gray-600 transition-colors duration-300">
