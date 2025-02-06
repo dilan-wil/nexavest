@@ -35,45 +35,53 @@ export default function Deposit() {
     if (!user) {
       return false;
     }
-    
-    try {
-      setLoading(true);
-      const added = await addDeposit({
+    console.log({
         userUid: user.uid,
         amount: amount,
         transactionId: transactionId,
-        gateway: paymentMethods === "mobile" ? mobileProvider : crypto,
-      });
-      console.log(added);
-      toast({
-        variant: "success",
-        title: "En attente d'approbation.",
-        description:
-          "Votre demande de dépôt est en attente d'approbation. Un administrateur se chargera de l'accepter.",
-      });
-    } catch (error) {
-      if (error.message === "This deposit request has already been processed.") {
-        // Specific toast for duplicate transaction error
-        toast({
-          variant: "destructive",
-          title: "Erreur de transaction",
-          description: "Cette demande de dépôt a déjà été traitée.",
-        });
-      } else {
-        // Generic toast for other errors
-        toast({
-          variant: "destructive",
-          title: "Erreur",
-          description:
-            "Rassurez-vous que vous avez entré le bon montant et la bonne clé de transaction.",
-        });
-      }
-    } finally {
-      setLoading(false);
-      setTransactionId("");
-      setAmount("");
-      setPaymentMethod("");
-    }
+        paymentMethod,
+        gateway: paymentMethod === "mobile" ? mobileProvider : crypto,
+      })
+    
+    // try {
+    //   setLoading(true);
+      
+    //   const added = await addDeposit({
+    //     userUid: user.uid,
+    //     amount: amount,
+    //     transactionId: transactionId,
+    //     gateway: paymentMethods === "mobile" ? mobileProvider : crypto,
+    //   });
+    //   console.log(added);
+    //   toast({
+    //     variant: "success",
+    //     title: "En attente d'approbation.",
+    //     description:
+    //       "Votre demande de dépôt est en attente d'approbation. Un administrateur se chargera de l'accepter.",
+    //   });
+    // } catch (error) {
+    //   if (error.message === "This deposit request has already been processed.") {
+    //     // Specific toast for duplicate transaction error
+    //     toast({
+    //       variant: "destructive",
+    //       title: "Erreur de transaction",
+    //       description: "Cette demande de dépôt a déjà été traitée.",
+    //     });
+    //   } else {
+    //     // Generic toast for other errors
+    //     toast({
+    //       variant: "destructive",
+    //       title: "Erreur",
+    //       description:
+    //         "Rassurez-vous que vous avez entré le bon montant et la bonne clé de transaction.",
+    //     });
+    //   }
+    // } finally {
+    //   setLoading(false);
+    //   setTransactionId("");
+    //   setAmount("");
+    //   setPaymentMethod("");
+    // }
   };
 
   return (
