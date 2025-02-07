@@ -48,7 +48,7 @@ export default function Deposit() {
         userUid: user.uid,
         amount: amount,
         transactionId: transactionId,
-        gateway: paymentMethods === "mobile" ? mobileProvider : crypto,
+        gateway: paymentMethod === "mobile" ? mobileProvider : crypto,
       });
       console.log(added);
       toast({
