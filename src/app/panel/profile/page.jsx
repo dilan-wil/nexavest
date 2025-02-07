@@ -11,7 +11,7 @@ import { useToast } from '@/hooks/use-toast'
 import Link from "next/link"
 
 export default function Profile() {
-  const {userInfo} = useAuth()
+  const {userInfo, referrals} = useAuth()
   const router = useRouter()
   const {toast} = useToast()
 
@@ -91,7 +91,7 @@ export default function Profile() {
         <Card className="bg-white p-4 md:p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
           <span className="material-symbols-outlined text-4xl md:text-5xl text-purple-500 mb-4">group</span>
           <h2 className="text-lg md:text-xl font-semibold mb-2">Nombre de Filleul</h2>
-          <p className="text-2xl md:text-3xl font-bold">24</p>
+          <p className="text-2xl md:text-3xl font-bold">{referrals?.length ?? 0}</p>
           <p className="text-sm text-gray-500 mt-2">Gagné: XAF{userInfo?.referralEarnings ?? 0}</p>
         </Card>
 
