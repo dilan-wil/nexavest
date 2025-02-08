@@ -212,14 +212,14 @@ export default function Deposit() {
                         ? "15mqyeTVd8NJoyrLQGoJCyLy3nZrsGdvgY"
                         : crypto === "eth"
                           ? "0x17bddd66a1ae60ac7a6aea84cb432e456bd1c833"
-                          : "TPeAE8zwT8qDhVHCkgngAQzNM13fsBy621"}</span>
+                          : "0x17bddd66a1ae60ac7a6aea84cb432e456bd1c833"}</span>
                             </p>
                             <p className="text-sm">
                                 Réseau: <span className="font-semibold">{crypto === "btc"
                         ? "BTC"
                         : crypto === "eth"
                           ? "BEP20"
-                          : "TRC20"}</span>
+                          : "BEP20"}</span>
                             </p>
                         </div>
                     </div>
