@@ -8,7 +8,7 @@ export function WhatsAppButton() {
   const [isExpanded, setIsExpanded] = useState(false)
 
   return (
-    <div className="absolute bottom-20 right-6 flex flex-col gap-2">
+    <div className="fixed bottom-20 right-6 flex flex-col gap-2">
     <details className="group">
         <summary className="w-12 h-12 rounded-full bg-green-500 shadow-lg flex items-center justify-center cursor-pointer hover:shadow-xl transition-all duration-300 outline-none hover:scale-105">
             <span className="material-symbols-outlined text-white transform group-open:rotate-180 transition-transform">
