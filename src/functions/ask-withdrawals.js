@@ -6,8 +6,8 @@ export async function askWithdrawal(userId, gateway, amount, numero, nom,userInf
     try {
         // Validate input
         const newAmount = parseInt(amount)
-        if (newAmount < 1500) {
-            throw new Error("Amount must be greater than 1500.");
+        if (newAmount < 1000) {
+            throw new Error("Amount must be greater than 1000.");
         }
         if (!userInfo.plans){
             throw new Error("You need a plan")

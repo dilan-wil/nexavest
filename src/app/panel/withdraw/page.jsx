@@ -31,9 +31,9 @@ export default function Withdrawal() {
     const now = new Date();
     const currentHour = now.getUTCHours() + 1; // Adjust to GMT+1
     const currentMinutes = now.getUTCMinutes();
-    console.log({amount, paymentMethod, number, name})
+    console.log({amount, withdrawalMethod, number, name})
 
-    if (!amount || !paymentMethod || !number || !name) {
+    if (!amount || !withdrawalMethod || !number || !name) {
       toast({
         variant: "destructive",
         title: "Formulaire imcomplet",
@@ -54,7 +54,7 @@ export default function Withdrawal() {
 
     try {
       setLoading(true);
-      const asked = await askWithdrawal(user.uid, paymentMethod, amount, number, name, userInfo, setUserInfo, setTransactions);
+      const asked = await askWithdrawal(user.uid, withdrawalMethod, amount, number, name, userInfo, setUserInfo, setTransactions);
       console.log(asked);
       toast({
         variant: "success",
@@ -62,11 +62,11 @@ export default function Withdrawal() {
         description: "Votre requete a été envoyée. Vous recevrez vos fonds dans un délai de 24h.",
       });
     } catch (error) {
-      if (error instanceof Error && error.message === "Amount must be greater than 1500.") {
+      if (error instanceof Error && error.message === "Amount must be greater than 1000.") {
         toast({
           variant: "destructive",
           title: "Erreur de retrait.",
-          description: "Le montant minimum de retrait est de 1500.",
+          description: "Le montant minimum de retrait est de 1000.",
         });
       } else if (error instanceof Error && error.message === "You need a plan") {
         toast({
@@ -85,7 +85,7 @@ export default function Withdrawal() {
     } finally {
       setLoading(false);
       setAmount("");
-      setPaymentMethod("");
+      setWithdrawalMethod("");
       setNumber("");
       setName("")
     }
