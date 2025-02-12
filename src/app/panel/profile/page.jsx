@@ -59,7 +59,7 @@ export default function Profile() {
             <span className="material-symbols-outlined mr-2">security</span>
             A propos
           </Button>
-          <Button variant="destructive" className="flex-1 md:flex-none">
+          <Button onClick={handleLogout} variant="destructive" className="flex-1 md:flex-none">
             <span className="material-symbols-outlined mr-2">logout</span>
             Déconnexion
           </Button>
